@@ -1,0 +1,66 @@
+#container {
+    height: 1080px;
+    overflow-y: auto;
+    display: grid;
+    grid-template-areas:
+    "Header Header  Header"
+    "Nav    Body    Side"
+    "Foot   Foot    Foot";
+    grid-template-columns: 1fr 3fr 1fr;
+    grid-template-rows: 1fr 4fr 1fr;
+    gap: 25px;
+    margin: 100px;
+}
+
+body {
+    background-image: url(assets/bridge.png);
+    background-size: cover;
+    font-family: 'Trebuchet MS', sans-serif;
+    color:skyblue;
+}
+
+button {
+    background-color: skyblue;
+    color:white;
+}
+
+#container > div {
+    border: solid skyblue 5px;
+    padding: 25px;
+    background-color: black;
+}
+
+#Header {
+    grid-area: Header;
+    text-align: left;
+    justify-self: left;
+    align-self: left;
+    min-width: 300px;
+}
+
+#Nav {
+    grid-area: Nav;
+}
+
+#Screenshots {
+    display: flex;
+    flex-direction: row;
+    gap: 25px;
+    justify-content: center;
+}
+
+#Screenshots > img {
+    max-width: 25%;
+    border: 3px solid black;
+}
+
+#Body {
+    grid-area: Body;
+    display: flex;
+    flex-direction: column;
+    justify-content:space-around; 
+}
+
+#Side {
+    grid-area: Side;
+}

@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <link rel="stylesheet" href="index.css"/>
+
+    <script type="text/babel">
+
+    const { useState } = React;
+
+    class App extends React.Component{
+        constructor(props){
+            super(props);
+        }
+
+        render(){
+            return(
+            <div id="container">
+                <Header/>
+                <Nav/>
+                <Body/>
+                <Side/>
+            </div>
+            );
+        }
+       
+    }
+
+    function Header(){
+        return(
+            <div id="Header">
+                <h1> Stryker's Site </h1>
+            </div>
+        );   
+    }
+
+    function Nav(){
+        return(
+            <div id="Nav">
+                <p> Nav </p>
+            </div>
+        )
+    }
+
+    function Side(){
+        return(
+            <div id="Side">
+                <p> Side </p>
+            </div>
+        )
+    }
+
+    function Body(){
+        return(
+            <div id="Body">
+                <p> Here is all the main stuff I can put here. </p>
+                <div>
+                    <h3> Screenshots: </h3>
+                    <ImageCarousel/>
+                </div>
+            </div>
+        );
+    }
+
+    class Timer extends React.Component{
+        constructor(props){
+            super(props);
+            this.state = { time: 3}
+        }
+
+        decrement(){
+            if(this.state.time == 1){
+                clearInterval(this.timerID);
+                this.props.HidePage;
+            }
+
+            this.setState({time: this.state.time - 1});
+        }
+
+        componentDidMount(){
+            this.timerID = setInterval( () => this.decrement(), 1000 );
+        }
+
+        componentWillUnmount(){
+            clearInterval(this.timerID);
+        }
+
+        render(){
+            return(
+                <p> Time: {this.state.time} </p>
+            );
+        }
+    }
+
+    class ImageCarousel extends React.Component{
+        constructor(props){
+            super(props);
+            this.state = { images: [
+                "assets/city.png",
+                "assets/cyberpunk.png",
+                "assets/space.png",
+                "assets/squad.png",
+                "assets/aurora.png",
+                ]
+            }
+        }
+
+        scrollRight(){
+            let deletedItem = this.state.images[0];
+            this.setState(prevState => ({
+                images: prevState.images.slice(1),
+            }));
+
+            this.setState(prevState => ({
+                images: [...prevState.images, deletedItem]
+            }));
+        }
+
+        scrollLeft(){
+            let len = this.state.images.length;
+            let newItem = this.state.images[len - 1];
+
+            this.setState(prevState => ({
+                images: [newItem, ...prevState.images]
+            }));
+
+            this.setState(prevState => ({
+                images: prevState.images.slice(0, -1),
+            }));
+
+        }
+
+        render(){
+            return(
+                <>
+                    <div id="Screenshots">
+                    <button onClick={() => this.scrollLeft()}> &larr; </button>
+                    <img src={this.state.images[0]}/>
+                    <img src={this.state.images[1]}/>
+                    <img src={this.state.images[2]}/>
+                    <button onClick={() => this.scrollRight()}> &rarr; </button>
+                    </div>
+                    
+                </>
+            );
+        }
+    }
+
+    </script>
+</head>
+
+<body>
+    <div id="root">
+    </div>
+        <script type="text/babel">
+            const root = ReactDOM.createRoot(document.getElementById('root'));
+            root.render(<App/>)
+        </script>
+</body>
+</html>
