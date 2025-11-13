@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8" />
 
+    <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+
     <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
@@ -35,6 +37,7 @@
         return(
             <div id="Header">
                 <h1> Stryker's Site </h1>
+                <Timer/>
             </div>
         );   
     }
@@ -59,6 +62,7 @@
         return(
             <div id="Body">
                 <p> Here is all the main stuff I can put here. </p>
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/sKKB1o4YEJ4?si=-MbknySbQbu3UZJ8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                 <div>
                     <h3> Screenshots: </h3>
                     <ImageCarousel/>
@@ -70,7 +74,7 @@
     class Timer extends React.Component{
         constructor(props){
             super(props);
-            this.state = { time: 3}
+            this.state = { time: 60}
         }
 
         decrement(){
