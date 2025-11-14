@@ -54,6 +54,7 @@
         return(
             <div id="Side">
                 <p> Side </p>
+                <RNG/>
             </div>
         )
     }
@@ -97,6 +98,25 @@
         render(){
             return(
                 <p> Time: {this.state.time} </p>
+            );
+        }
+    }
+
+    class RNG extends React.Component{
+        constructor(props){
+            super(props);
+            this.state = { digit: 0};
+        }
+
+        GenNumber(){
+            let randomNum = Math.random() * 10;
+            randomNum = Math.floor(randomNum);
+            this.setState({ digit: randomNum});
+        }
+
+        render(){
+            return(
+                <button onClick={() => this.GenNumber()}> Generate Number: {this.state.digit} </button>
             );
         }
     }
